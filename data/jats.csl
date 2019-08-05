@@ -97,7 +97,10 @@
     </choose>
     <choose>
       <if variable="URL" match="any">
-        <text variable="URL" />
+        <group prefix="{{jats}}&lt;ext-link ext-link-type=&quot;web&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
+xlink:href=&quot;{{/jats}}" suffix="{{jats}}&quot;/&gt;{{/jats}}">
+          <text variable="URL" />
+        </group>
       </if>
     </choose>
   </macro>
