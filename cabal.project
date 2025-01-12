@@ -113,11 +113,11 @@ constraints:
   unix installed,
   xhtml installed
 
+-- https://github.com/haskell/network/pull/598
 source-repository-package
   type: git
-  location: https://github.com/haskell-wasm/conduit.git
-  tag: ff33329247f2ef321dcab836e98c1bcfaff2bd13
-  subdir: conduit-extra
+  location: https://github.com/haskell-wasm/network.git
+  tag: ab92e48e9fdf3abe214f85fdbe5301c1280e14e9
 
 source-repository-package
   type: git
@@ -132,11 +132,6 @@ source-repository-package
 
 source-repository-package
   type: git
-  location: https://github.com/haskell-wasm/streaming-commons.git
-  tag: 7e9c38b2fd55ce50d3f74fe708ca47db8c9bb315
-
-source-repository-package
-  type: git
   location: https://github.com/haskell-wasm/xml.git
   tag: bc793dc9bc29c92245d3482a54d326abd3ae1403
   subdir: xml-conduit
@@ -146,3 +141,9 @@ source-repository-package
   type: git
   location: https://github.com/amesgen/splitmix
   tag: 5f5b766d97dc735ac228215d240a3bb90bc2ff75
+
+source-repository-package
+  type: git
+  location: https://github.com/amesgen/cborg
+  tag: c3b5c696f62d04c0d87f55250bfc0016ab94d800
+  subdir: cborg

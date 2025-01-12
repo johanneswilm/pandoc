@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -26,9 +25,7 @@ import Data.Word (Word8)
 import Data.Text (Text)
 import qualified Data.Text as T
 import GHC.Generics (Generic)
-#if !defined(wasm32_HOST_ARCH)
 import Network.HTTP.Client (HttpException)
-#endif
 import System.Exit (ExitCode (..), exitWith)
 import System.IO (stderr)
 import qualified Text.Pandoc.UTF8 as UTF8
@@ -37,9 +34,7 @@ import Text.Pandoc.Shared (tshow)
 import Citeproc (CiteprocError, prettyCiteprocError)
 
 data PandocError = PandocIOError Text IOError
-#if !defined(wasm32_HOST_ARCH)
                  | PandocHttpError Text HttpException
-#endif
                  | PandocShouldNeverHappenError Text
                  | PandocSomeError Text
                  | PandocParseError Text
@@ -78,10 +73,8 @@ renderError :: PandocError -> Text
 renderError e =
   case e of
     PandocIOError _ err' -> T.pack $ displayException err'
-#if !defined(wasm32_HOST_ARCH)
     PandocHttpError u err' ->
       "Could not fetch " <> u <> "\n" <> tshow err'
-#endif
     PandocShouldNeverHappenError s ->
       "Something we thought was impossible happened!\n" <>
       "Please report this to pandoc's developers: " <> s
@@ -176,9 +169,7 @@ handleError (Left e) =
       PandocPDFError{} -> 43
       PandocXMLError{} -> 44
       PandocPDFProgramNotFoundError{} -> 47
-#if !defined(wasm32_HOST_ARCH)
       PandocHttpError{} -> 61
-#endif
       PandocShouldNeverHappenError{} -> 62
       PandocSomeError{} -> 63
       PandocParseError{} -> 64
